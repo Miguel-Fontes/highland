@@ -1,5 +1,5 @@
 'use strict'
-let app = (function (spec, my) {
+let highland = (function (spec, my) {
   // http
   // modulos
   // controllers
@@ -27,7 +27,7 @@ let app = (function (spec, my) {
     // TODO: Validar parâmetros e definir valores detault 
     config = config || {}
     config.hostname = config.hostname || 'localhost'
-    config.port = config.port || '8080' 
+    config.port = config.port || '8080'
       
     // TODO: Construir rotas padrão de acordo com informações do módulo.
     my.routes = (rq, rs) => {
@@ -52,6 +52,6 @@ let app = (function (spec, my) {
   // TODO: Como fazer com Databases?
 
   return that
-}())
+})
 
-module.exports = app
+module.exports = highland

@@ -1,6 +1,6 @@
 'use strict'
 let expect = require('chai').expect
-let app = require('./../src/app.js')
+let app = require('./../src/app.js')()
 
 describe('App', function () {
   it('should be defined.', function (done) {
