@@ -1,20 +1,47 @@
-/*'use strict'
+'use strict'
 let expect = require('chai').expect
-let app = require('./../src/server.js')
 
-describe('App', function () {
-  it('should be defined.', function (done) {
-    expect(app).not.to.be.undefined
-    done()
+describe('Server', function () {
+  describe('API', function () {
+    let server = require('./../src/server.js')()
+
+    it('should be defined.', function (done) {
+      expect(server).not.to.be.undefined
+      done()
+    })
+
+    it('should be a object', function (done) {
+      expect(typeof server).to.be.equals('object')
+      done()
+    })
+
+    it('should define "getHttp"', function (done) {
+      expect(server.getHttp).not.to.be.undefined
+      done()
+    })
+
+    it('should define "stop"', function (done) {
+      expect(server.stop).not.to.be.undefined
+      done()
+    })
+    it('should define "initialize"', function (done) {
+      expect(server.initialize).not.to.be.undefined
+      done()
+    })
   })
-  
-  it('should be a object', function (done) {
-    expect(typeof app).to.be.equals('object')
-    done()
+  describe('initialization', function () {
+    it('should initialize with no parameters', function (done) {
+      let server = require('./../src/server.js')()
+      expect(server.getHttp()).not.to.be.undefined
+      expect(server.getHttp().constructor).to.match(/Server/)
+      done()
+    })
+
+    it('should initialize with parameters', function (done) {
+      let server = require('./../src/server.js')({hostname: 'localhost', port: '8080'})
+      expect(server.getHttp()).not.to.be.undefined
+      expect(server.getHttp().constructor).to.match(/Server/)
+      done()
+    })
   })
-  
-  it('should define "use"', function (done) {
-    expect(app.use).not.to.be.undefined
-    done()
-  })
-})*/
+})

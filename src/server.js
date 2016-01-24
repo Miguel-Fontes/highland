@@ -8,8 +8,8 @@ let server = (function (spec, my) {
   spec = spec || { }
   my = my || { }
 
-  my.hostname = spec.hostname
-  my.port = spec.port
+  my.hostname = spec.hostname || 'localhost'
+  my.port = spec.port || '8080'
   my.server = http.createServer(spec.routes)
 
   let that = {}
@@ -18,7 +18,6 @@ let server = (function (spec, my) {
   that.initialize = initialize
   that.getHttp = getHttp
   that.stop = stop
-  that.routes = spec.routes
 
   // Inicialização
   function initialize (callback) {
