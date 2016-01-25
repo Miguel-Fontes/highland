@@ -4,38 +4,53 @@ let highland = (function (spec, my) {
   // modulos
   // controllers
   // database
+  // TODO: Como fazer com Databases?
 
-  spec = spec || {}
-  my = my || {}
+  const server = require('./server')
+  const router = require('./router/router')
 
   let that = {}
 
-  const server = require('./server')
-  const router = require('./router').build()
-
+  spec = spec || {}
+  my = my || {}
+  my.http = {}
   my.modules = []
 
+  // API
+  that.use = use
+  that.http = http
+  that.listen = listen
+  that.stop = stop
+
   // { module: function, route: string <module-name>, config: {hostname: string || <localhost>, port: string <8080>} }
-  that.use = function (module) {
+  function use (module) {
     my.modules.push(module)
     return that
   }
 
+  function http () {
+    return my.http
+  }
+
+  function stop () {
+    my.http.stop()
+  }
+
   // config: {hostname: string || <localhost>, port: string <8080>}
-  that.listen = function (config) {
-    
+  function listen (config) {
     // TODO: Validar parâmetros e definir valores detault 
     config = config || {}
     config.hostname = config.hostname || 'localhost'
     config.port = config.port || '8080'
-      
+
+    // TODO: Validar a possibilidade de chamar Listen sem nenhum módulo configurado
     // TODO: Construir rotas padrão de acordo com informações do módulo.
     my.routes = (rq, rs) => {
       my.modules.forEach((module) => {
         router
-          .all('/' + module.route, module.routes(rq, rs))
+          .all('/' + module.route, rq, rs, module.routes)
           .end()
-          // TODO: Implementar 'Otherwise'. Se não deu match em nenhuma rota, manda um 404.
+      // TODO: Implementar 'Otherwise'. Se não deu match em nenhuma rota, manda um 404.
       })
     }
 
@@ -45,11 +60,9 @@ let highland = (function (spec, my) {
     my.http.initialize((err, http) => {
       console.log('Listening at ' + config.hostname + ':' + config.port)
     })
-    
+
     return that
   }
-
-  // TODO: Como fazer com Databases?
 
   return that
 })

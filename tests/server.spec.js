@@ -15,8 +15,8 @@ describe('Server', function () {
       done()
     })
 
-    it('should define "getHttp"', function (done) {
-      expect(server.getHttp).not.to.be.undefined
+    it('should define "getServer"', function (done) {
+      expect(server.getServer).not.to.be.undefined
       done()
     })
 
@@ -32,15 +32,15 @@ describe('Server', function () {
   describe('initialization', function () {
     it('should initialize with no parameters', function (done) {
       let server = require('./../src/server.js')()
-      expect(server.getHttp()).not.to.be.undefined
-      expect(server.getHttp().constructor).to.match(/Server/)
+      expect(server.getServer()).not.to.be.undefined
+      expect(server.getServer().constructor).to.match(/Server/)
       done()
     })
 
     it('should initialize with parameters', function (done) {
       let server = require('./../src/server.js')({hostname: 'localhost', port: '8080'})
-      expect(server.getHttp()).not.to.be.undefined
-      expect(server.getHttp().constructor).to.match(/Server/)
+      expect(server.getServer()).not.to.be.undefined
+      expect(server.getServer().constructor).to.match(/Server/)
       done()
     })
   })

@@ -16,7 +16,7 @@ let server = (function (spec, my) {
 
   // Api
   that.initialize = initialize
-  that.getHttp = getHttp
+  that.getServer = getServer
   that.stop = stop
 
   // Inicialização
@@ -36,7 +36,7 @@ let server = (function (spec, my) {
 
   // Funções
   // TODO: Verificar se é realmente necessário retornar esta informação
-  function getHttp () {
+  function getServer () {
     return my.server
   }
 
