@@ -4,7 +4,7 @@ module.exports = (function ctrlMock () {
   return {
     initialize: function () {  return 'initialize' },
     remove: function () {  rs.end('remove') },
-    query: function () {  rs.end('query')  },
+    query: function () { rs.end('query')  },
     update: function () {  rs.end('update') },
     get: function () {  rs.end('get') },
     options: function () {  rs.end('options')  },
