@@ -8,8 +8,10 @@ let highland = (function (spec, my) {
 
   const server = require('./server')
   const router = require('./router/router')
+  const dbInit = require('./db/dbinit')
 
-  let that = {}
+  let that = {},
+    db
 
   spec = spec || {}
   my = my || {}
@@ -22,9 +24,18 @@ let highland = (function (spec, my) {
   that.listen = listen
   that.stop = stop
 
-  // { module: function, route: string <module-name> }
+  // { module: function, route: string <module-name>, db: <boolean>,  }
   function use (module) {
-    my.modules.push(module)
+    let resolved = module
+
+    if (module.hasOwnProperty('db')) {
+      resolved.entry = (module.db) ? module.entry({ db: module.db }) : module.entry()
+    } else {
+      resolved.entry = module.entry()
+    }
+
+    my.modules.push(resolved)
+
     return that
   }
 

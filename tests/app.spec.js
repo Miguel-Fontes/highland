@@ -3,10 +3,10 @@ const expect = require('chai').expect
 let request = require('supertest')
 const highland = require('./../src/highland')
 
-const mod = require('./mocks/module.mock')()
+const mod = require('./mocks/module.mock')
 const ctrl = require('./mocks/controller.mock')
 
-describe('App suite', function (done) {
+describe('App suite', function () {
   const app = highland()
 
   it('should start our application', function (done) {
