@@ -12,6 +12,6 @@ let mod = (function (spec, my) {
   that.routes = my.router.routes()
 
   return that
-}())
+})
 
 module.exports = mod

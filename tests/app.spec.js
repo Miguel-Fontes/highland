@@ -3,9 +3,7 @@ const expect = require('chai').expect
 let request = require('supertest')
 const highland = require('./../src/highland')
 
-const mod = require('./mocks/module.mock')
-const model = require('./mocks/module-model.mock')
-const routes = require('./mocks/module-router.mock')
+const mod = require('./mocks/module.mock')()
 const ctrl = require('./mocks/controller.mock')
 
 describe('App suite', function (done) {

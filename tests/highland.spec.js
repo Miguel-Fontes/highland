@@ -2,7 +2,7 @@
 let expect = require('chai').expect
 let app = require('./../src/highland.js')()
 let request = require('supertest')
-let mod = require('./mocks/module.mock.js')
+let mod = require('./mocks/module.mock.js')()
 
 describe('highland', function () {
   after(done => {
@@ -61,8 +61,8 @@ describe('highland', function () {
     })
 
     it('should register 2 modules', function (done) {
-      let mod1 = require('./mocks/modules/module1.mock.js')
-      let mod2 = require('./mocks/modules/module2.mock.js')
+      let mod1 = require('./mocks/modules/module1.mock.js')()
+      let mod2 = require('./mocks/modules/module2.mock.js')()
 
       expect(app.use({entry: mod1, route: '/module'})).to.be.equals(app)
       expect(app.use({entry: mod2, route: '/mod2'})).to.be.equals(app)
