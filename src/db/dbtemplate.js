@@ -2,7 +2,7 @@
 let dbImplementation = (spec, my) => {
   let that = { }
 
-  config = config || { }
+  spec = spec || { }
   my = my || { }
 
   // API
