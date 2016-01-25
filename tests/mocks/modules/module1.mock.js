@@ -1,7 +1,6 @@
 'use strict'
 let mod = (function (spec, my) {
-  let that = {},
-    router = require('./../../../src/router/router')
+  let that = {}
 
   spec = spec || {}
   my = my || {}
@@ -10,6 +9,7 @@ let mod = (function (spec, my) {
   my.router = require('./module1-router.mock.js')({ ctrl: my.ctrl, routes: spec.routes || '' })
 
   that.routes = my.router.routes()
+  that.dependencies = spec.dependencies || { }
 
   return that
 })

@@ -22,12 +22,12 @@ let highland = (function (spec, my) {
   that.listen = listen
   that.stop = stop
 
-  // { module: function, route: string <module-name>, db: <boolean>,  }
+  // { module: function, route: string <module-name>, dependencies: { ... } ,  }
   function use (module) {
     let resolved = module
 
-    if (module.hasOwnProperty('db')) {
-      resolved.entry = (module.db) ? module.entry({ db: module.db }) : module.entry()
+    if (module.hasOwnProperty('dependencies')) {
+      resolved.entry = (module.dependencies) ? module.entry(module.dependencies) : module.entry()
     } else {
       resolved.entry = module.entry()
     }

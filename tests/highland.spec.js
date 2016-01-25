@@ -101,6 +101,27 @@ describe('highland', function () {
         .expect('query')
         .end(done)
     })
+  })
+  describe('Dependency Injection', function () {
+    after(done => {
+      app.stop()
+      done()
+    })
+
+    it('should pass dependencies to modules', function (done) {
+      let mod1 = require('./mocks/modules/module1.mock.js')
+      let mod2 = require('./mocks/modules/module2.mock.js')
+
+      expect(app.use({entry: mod1, route: '/module', dependencies: { db: function database (spec, my) { return 'DB'} } })).to.be.equals(app)
+      expect(app.use({entry: mod2, route: '/mod2', dependencies: { db: function database (spec, my) { return 'DB'} } })).to.be.equals(app)
+
+      done()
+    })
+
+    it('should accept a call to "listen" with no parameters', function (done) {
+      expect(app.listen()).to.be.equals(app)
+      done()
+    })
 
   })
 

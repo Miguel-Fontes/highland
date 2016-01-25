@@ -1,19 +1,22 @@
 'use strict'
-let dbInit = function (spec, my) {
+let commonDB = function (spec, my) {
   // TODO: Tratamento de erros para o caso das configurações não existirem
-  // SPEC = { config: { }, env: string,  }
-  
-  var dbModule = spec.config.env[env].db,
-    dbConfig = (dbModule in spec.config.db ? spec.config.db[dbModule][env] : { })
-    
-   spec = spec || { }
-   my = my || { }
+  // SPEC = { config: {   }, env: string, callback: function }
+
+  var dbModule,
+    dbConfig
+
+  spec = spec || { }
+  my = my || { }
+
+  dbModule = spec.config.env[spec.env].db,
+  dbConfig = (dbModule in spec.config.db ? spec.config.db[dbModule][spec.env] : { })
 
   // Lógica de inicialização do Database está encapsulada dentro do próprio objeto do DB
-  // passo à frente o callback. O retorno pro callback será err e o database.
+  // passo à frente o callback.
   require('./' + dbModule)
     .build(dbConfig)
     .initialize(spec.callback)
 }
 
-module.exports = dbInit
+module.exports = commonDB
