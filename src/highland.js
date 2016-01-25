@@ -22,7 +22,7 @@ let highland = (function (spec, my) {
   that.listen = listen
   that.stop = stop
 
-  // { module: function, route: string <module-name>, config: {hostname: string || <localhost>, port: string <8080>} }
+  // { module: function, route: string <module-name> }
   function use (module) {
     my.modules.push(module)
     return that
@@ -45,14 +45,14 @@ let highland = (function (spec, my) {
 
     // TODO: Validar a possibilidade de chamar Listen sem nenhum módulo configurado
     // TODO: Construir rotas padrão de acordo com informações do módulo.
-    my.routes = (rq, rs) => {
+    my.routes = ((rq, rs) => {
       my.modules.forEach((module) => {
         router
-          .all('/' + module.route, rq, rs, module.routes)
+          .all(module.route, rq, rs, module.entry.routes)
           .end()
       // TODO: Implementar 'Otherwise'. Se não deu match em nenhuma rota, manda um 404.
       })
-    }
+    })
 
     config.routes = my.routes
 

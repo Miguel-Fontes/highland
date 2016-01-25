@@ -1,17 +1,11 @@
 'use strict'
-// Prototypes ----------------------------------------------
-String.prototype.contains = function (char) {
-  var value = this.toString()
-  return value.match(char) != undefined ? true : false
-}
-// ---------------------------------------------------------
-
-let router = (function Router (spec) {
+let router = (function Router (spec, my) {
   // var log = require('./log').log
   let matched = false,
     that = {}
 
   spec = spec || { }
+  my = my || { }
 
   // API
   that.when = when
@@ -108,9 +102,16 @@ let router = (function Router (spec) {
       // if (typeof (urlSplit) != string) { return false }
     }
   }
-  
+
   return that
-  
+
 }())
+
+// Prototypes ----------------------------------------------
+String.prototype.contains = function (char) {
+  var value = this.toString()
+  return value.match(char) != undefined ? true : false
+}
+// ---------------------------------------------------------
 
 module.exports = router

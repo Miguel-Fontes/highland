@@ -7,7 +7,7 @@ let mod = (function (spec, my) {
   my = my || {}
   
   my.ctrl = require('./controller.mock.js')
-  my.router = require('./module-router.mock.js')({ ctrl: my.ctrl })
+  my.router = require('./module-router.mock.js')({ ctrl: my.ctrl, routes: spec.routes || '' })
 
   that.routes = my.router.routes()
 

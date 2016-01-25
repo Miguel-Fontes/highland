@@ -6,7 +6,7 @@ let routes = (function mockRouter (spec, my) {
   spec = spec || { }
   my = my || { }
 
-  my.routes = routes
+  my.routes = spec.routes || routes 
   that.routes = getRoutes
 
   function getRoutes () {
