@@ -1,4 +1,4 @@
-module.exports = (function ctrlMock () {
+module.exports = (function ctrlMock (spec, my) {
   var rq, rs
 
   return {
@@ -10,11 +10,12 @@ module.exports = (function ctrlMock () {
     options: function () {  rs.end('options')  },
     save: function () {  rs.end('save')   },
     forbidden: function () {  rs.end('forbidden') },
-    setTransaction: setTransaction
+    setTransaction: setTransaction,
+    spec: spec
   }
 
   function setTransaction (req, res) {
     rq = req
     rs = res
   }
-})()
+})
