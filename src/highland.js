@@ -8,14 +8,12 @@ let highland = (function (spec, my) {
 
   const server = require('./server')
   const router = require('./router/router')
-  const dbInit = require('./db/dbinit')
 
-  let that = {},
-    db
+  let that = { }
 
-  spec = spec || {}
-  my = my || {}
-  my.http = {}
+  spec = spec || { }
+  my = my || { }
+  my.http = { }
   my.modules = []
 
   // API
@@ -45,6 +43,7 @@ let highland = (function (spec, my) {
 
   function stop () {
     my.http.stop()
+    return that
   }
 
   // config: {hostname: string || <localhost>, port: string <8080>}
