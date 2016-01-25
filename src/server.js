@@ -35,7 +35,6 @@ let server = (function (spec, my) {
   }
 
   // Funções
-  // TODO: Verificar se é realmente necessário retornar esta informação
   function getServer () {
     return my.server
   }
