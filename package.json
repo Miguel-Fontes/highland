@@ -1,7 +1,7 @@
 {
-  "name": "highland",
+  "name": "object-foundation",
   "version": "0.1.1",
-  "description": "",
+  "description": "simple framework providing a abstraction to controllers, models and routes ",
   "main": "index.js",
   "scripts": {
     "test": "mocha .\\tests\\**\\*.js",
