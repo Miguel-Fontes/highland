@@ -2,6 +2,7 @@
 let routes = (function routes (spec, my) {
   let that = {}
 
+  // TODO: valudar parâmetros
   spec = spec || {}
   my = my || {}
 
