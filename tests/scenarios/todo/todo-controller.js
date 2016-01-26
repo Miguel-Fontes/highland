@@ -30,11 +30,12 @@ function buildResponse (response, status, headers, value) {
 }
 
 function readRequest (rq, rs, dataAction) {
-  var body = []
+  let chunks = []
+  let body
   rq.on('data', function (chunk) {
-    body.push(chunk)
+    chunks.push(chunk)
   }).on('end', function () {
-    body = Buffer.concat(body).toString()
+    body = Buffer.concat(chunks).toString()
     dataAction(body)
   })
 }
