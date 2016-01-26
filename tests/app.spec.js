@@ -1,20 +1,34 @@
 'use strict'
-let expect = require('chai').expect
-let app = require('./../src/app.js')
+const expect = require('chai').expect
+let request = require('supertest')
+const highland = require('./../src/highland')
 
-describe('App', function () {
-  it('should be defined.', function (done) {
-    expect(app).not.to.be.undefined
+const mod = require('./mocks/module.mock')
+const ctrl = require('./mocks/controller.mock')
+
+describe('App suite', function () {
+  const app = highland()
+
+  it('should start our application', function (done) {
+    app.use({
+      entry: mod,
+      route: '/mod'
+    })
+
+    app.listen()
+
     done()
   })
-  
-  it('should be a object', function (done) {
-    expect(typeof app).to.be.equals('object')
-    done()
-  })
-  
-  it('should define "use"', function (done) {
-    expect(app.use).not.to.be.undefined
-    done()
+
+  it('should response a request to /mod with "query"', function (done) {
+    let http = request(app.http().getServer())
+    http
+      .get('/mod')
+      .expect(200)
+      .expect('query')
+      .end(function (err, res) {
+        if (err) throw err
+        done()
+      })
   })
 })
