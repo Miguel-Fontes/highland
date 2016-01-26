@@ -1,12 +1,11 @@
 'use strict'
 let mod = (function (spec, my) {
-  let that = {},
-    router = require('./../../../src/router/router')
+  let that = {}
 
   spec = spec || {}
   my = my || {}
-  
-  my.ctrl = require('./../controller.mock.js')
+
+  my.ctrl = require('./../controller.mock.js')()
   my.router = require('./module2-router.mock.js')({ ctrl: my.ctrl, routes: spec.routes || '' })
 
   that.routes = my.router.routes()

@@ -1,13 +1,10 @@
 'use strict'
 let highland = (function (spec, my) {
-  // http
-  // modulos
-  // controllers
-  // database
-  // TODO: Como fazer com Databases?
-
   const server = require('./server')
   const router = require('./router/router')
+  const controller = require('./builders/controller')
+  const routes = require('./builders/routes')
+  const module = require('./builders/module')
 
   let that = { }
 
@@ -21,6 +18,11 @@ let highland = (function (spec, my) {
   that.http = http
   that.listen = listen
   that.stop = stop
+
+  // builders: construtores de objetos para facilitar o trabalho do usuário
+  that.controller = controller
+  that.module = module
+  that.routes = routes
 
   // { module: function, route: string <module-name>, dependencies: { ... } ,  }
   function use (module) {
@@ -68,7 +70,7 @@ let highland = (function (spec, my) {
 
     my.http = server(config)
     my.http.initialize((err, http) => {
-      console.log('Listening at ' + config.hostname + ':' + config.port)
+      return that
     })
 
     return that

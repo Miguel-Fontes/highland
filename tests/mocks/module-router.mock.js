@@ -8,6 +8,9 @@ let routes = (function mockRouter (spec, my) {
 
   my.routes = spec.routes || routes 
   that.routes = getRoutes
+  
+  that.spec = spec
+  that.my = my
 
   function getRoutes () {
     return my.routes
