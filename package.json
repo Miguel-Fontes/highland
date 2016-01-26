@@ -1,6 +1,6 @@
 {
   "name": "object-foundation",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "simple framework providing a abstraction to controllers, models and routes ",
   "main": "index.js",
   "scripts": {
