@@ -1,11 +1,11 @@
 'use strict'
 
 let routes = {
-  '/todo': {
+  '/tasks': {
     get: 'query',
     post: 'save'
   },
-  '/todo/:id': {
+  '/tasks/:id': {
     put: 'update',
     delete: 'remove',
     get: 'get',
