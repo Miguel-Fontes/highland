@@ -24,10 +24,11 @@ let highland = (function (spec, my) {
   that.http = http
   that.listen = listen
   that.stop = stop
-
-  that.controller = controller()
-  that.module = module()
-  that.routes = routes()
+  
+  // builders: construtores de objetos para facilitar o trabalho do usuário
+  that.controller = controller
+  that.module = module
+  that.routes = routes
 
   // { module: function, route: string <module-name>, dependencies: { ... } ,  }
   function use (module) {
