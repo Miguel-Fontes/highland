@@ -16,7 +16,7 @@ let controller = (function controller (spec, my) {
   that.forbidden = spec.forbidden || notFound
 
   // TODO: Esta função deve escrever no response.
-  function notFound (params, request, response) {
+  function notFound (request, response) {
     response.writeHead(404)
     response.write('Not supported action')
     response.end()
