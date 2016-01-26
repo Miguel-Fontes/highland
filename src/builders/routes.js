@@ -15,7 +15,7 @@ let routes = (function routes (spec, my) {
       for (let method in spec.routes[route]) {
         router
           .when(method, route, request, () => {
-            my.controller[spec.routes[route][method]](request, response)
+            my.controller[spec.routes[route][method]](request, response, my.dependencies)
           })
       }
     }
