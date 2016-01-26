@@ -21,11 +21,11 @@ let mod = (function (spec, my) {
     
   function initialize () {
     my.controller = typeof my.controller === ('function')
-      ? my.controller(my.dependencies)
+      ? my.controller({}, my.dependencies)
       : my.controller
 
     my.router = typeof my.router === ('function')
-      ? my.router(my.dependencies)
+      ? my.router({}, my.dependencies)
       : my.router
   }
 

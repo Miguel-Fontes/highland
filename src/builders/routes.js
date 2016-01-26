@@ -7,7 +7,6 @@ let routes = (function routes (spec, my) {
   my = my || {}
 
   my.routes = spec.routes || {}
-  my.dependencies = spec.dependencies || {}
 
   that.routes = () => {
     return my.routes
