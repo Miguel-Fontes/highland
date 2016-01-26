@@ -10,6 +10,7 @@ let routes = (function mockRouter (spec, my) {
   that.routes = getRoutes
   
   that.spec = spec
+  that.my = my
 
   function getRoutes () {
     return my.routes

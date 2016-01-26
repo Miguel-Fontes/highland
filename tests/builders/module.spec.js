@@ -21,8 +21,8 @@ describe('Module builder', function () {
       done()
     })
 
-    it('should define a router api', function (done) {
-      expect(module.router).not.to.be.undefined
+    it('should define a routes api', function (done) {
+      expect(module.routes).not.to.be.undefined
       done()
     })
 
@@ -30,7 +30,7 @@ describe('Module builder', function () {
   describe('construction', function () {
     const module = require('./../../src/builders/module')
     const controller = require('./../mocks/controller.mock.js')
-    const router = require('./../mocks/module-router.mock.js')
+    const routes = require('./../mocks/module-router.mock.js')
 
     it('should build a controller with no dependencies', function (done) {
       let ctrl = module({ controller: controller }).controller
@@ -49,20 +49,20 @@ describe('Module builder', function () {
       expect(ctrl.remove).not.to.be.undefined
       expect(ctrl.get).not.to.be.undefined
       expect(ctrl.query).not.to.be.undefined
-      expect(ctrl.spec).to.deep.equal({ db: 'database'})
+      expect(ctrl.my.dependencies).to.deep.equal({ db: 'database'})
       done()
     })
 
-    it('should build a router with no dependencies', function (done) {
-      let routes = module({ router: router }).router
-      expect(routes).not.to.be.undefined
+    it('should build a routes with no dependencies', function (done) {
+      let routes_obj = module({ routes: routes }).routes
+      expect(routes_obj).not.to.be.undefined
       done()
     })
 
     it('should build a router with dependencies', function (done) {
-      let routes = module({ router: router, dependencies: { dependency: 'dependency' } }).router
-      expect(routes).not.to.be.undefined
-      expect(routes.spec).to.deep.equal({ dependency: 'dependency'})
+      let routes_obj = module({ routes: routes, dependencies: { dependency: 'dependency' } }).routes
+      expect(routes_obj).not.to.be.undefined
+      expect(routes_obj.my.dependencies).to.deep.equal({ dependency: 'dependency'})
       done()
     })
 
@@ -76,7 +76,7 @@ describe('Module builder', function () {
     it('should build with sucess', function (done) {
       myModule = module({
         controller: controller,
-        router: router,
+        routes: router,
         dependencies: {
           db: 'database',
           server: 'server'
@@ -86,9 +86,9 @@ describe('Module builder', function () {
     })
 
     it('should have constructed the router', function (done) {
-      let routes = myModule.router
+      let routes = myModule.routes
       expect(routes).not.to.be.undefined
-      expect(routes.spec).to.deep.equal({ db: 'database', server: 'server'})
+      expect(routes.my.dependencies).to.deep.equal({ db: 'database', server: 'server'})
       done()
     })
 
@@ -99,7 +99,7 @@ describe('Module builder', function () {
       expect(ctrl.remove).not.to.be.undefined
       expect(ctrl.get).not.to.be.undefined
       expect(ctrl.query).not.to.be.undefined
-      expect(ctrl.spec).to.deep.equal({ db: 'database', server: 'server'})
+      expect(ctrl.my.dependencies).to.deep.equal({ db: 'database', server: 'server'})
       done()
     })
   })

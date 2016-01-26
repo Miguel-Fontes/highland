@@ -11,7 +11,8 @@ module.exports = (function ctrlMock (spec, my) {
     save: function () {  rs.end('save')   },
     forbidden: function () {  rs.end('forbidden') },
     setTransaction: setTransaction,
-    spec: spec
+    spec: spec,
+    my: my
   }
 
   function setTransaction (req, res) {
