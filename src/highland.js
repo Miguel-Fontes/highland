@@ -2,9 +2,7 @@
 let highland = (function (spec, my) {
   const server = require('./server')
   const router = require('./router/router')
-  const controller = require('./builders/controller')
-  const routes = require('./builders/routes')
-  const module = require('./builders/module')
+  const moduleBuilder = require('./builders/module')
 
   let that = { }
 
@@ -19,20 +17,19 @@ let highland = (function (spec, my) {
   that.listen = listen
   that.stop = stop
 
-  // builders: construtores de objetos para facilitar o trabalho do usuário
-  that.controller = controller
-  that.module = module
-  that.routes = routes
-
   // { module: function, route: string <module-name>, dependencies: { ... } ,  }
   function use (module) {
     let resolved = module
 
-    if (module.hasOwnProperty('dependencies')) {
-      resolved.entry = (module.dependencies) ? module.entry(module.dependencies) : module.entry()
-    } else {
-      resolved.entry = module.entry()
+    if (typeof module !== 'function' && module.hasOwnProperty('dependencies')) {
+      resolved.entry = moduleBuilder(module.entry, {dependencies: module.dependencies})
     }
+
+    /*    if (module.hasOwnProperty('dependencies')) {
+          resolved.entry = (module.dependencies) ? module.entry(module.dependencies) : module.entry()
+        } else {
+          resolved.entry = module.entry()
+        }*/
 
     my.modules.push(resolved)
 
@@ -60,7 +57,7 @@ let highland = (function (spec, my) {
     my.routes = ((rq, rs) => {
       my.modules.forEach((module) => {
         router
-          .all(module.route, rq, rs, module.entry.routes)
+          .all(module.route, rq, rs, module.entry.routes.get())
           .end()
       // TODO: Implementar 'Otherwise'. Se não deu match em nenhuma rota, manda um 404.
       })

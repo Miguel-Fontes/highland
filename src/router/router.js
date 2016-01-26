@@ -37,7 +37,7 @@ let router = (function Router (spec, my) {
 
     function validMethod () {
       // Implementar o método ALL aqui
-      return method == request.method ? true : false
+      return method.toUpperCase() == request.method.toUpperCase()
     }
 
     // Chainning Cleverness
